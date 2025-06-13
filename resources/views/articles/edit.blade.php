@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <h1>✏️ Editar Artigo</h1>
+    <h1><i class="bi bi-pencil"></i> Editar Artigo</h1>
     <a href="{{ route('articles.index') }}" class="btn btn-secondary">
-        ⬅️ Voltar
+        <i class="bi bi-arrow-left fs-5 align-middle me-1"></i> Voltar
     </a>
 </div>
 
@@ -15,7 +15,7 @@
             @method('PUT')
             
             <div class="mb-3">
-                <label for="titulo" class="form-label">📝 Título *</label>
+                <label for="titulo" class="form-label">📝 Título </label>
                 <input type="text" class="form-control @error('titulo') is-invalid @enderror" 
                        id="titulo" name="titulo" value="{{ old('titulo', $article->titulo) }}" 
                        placeholder="Digite o título do artigo..." required>
@@ -35,15 +35,15 @@
             </div>
 
             <div class="mb-3">
-                <label for="status" class="form-label">🔄 Status *</label>
+                <label for="status" class="form-label">🔄 Status </label>
                 <select class="form-select @error('status') is-invalid @enderror" 
                         id="status" name="status" required>
                     <option value="">Selecione o status...</option>
                     <option value="ativo" {{ old('status', $article->status) === 'ativo' ? 'selected' : '' }}>
-                        ✅ Ativo
+                         Ativo
                     </option>
                     <option value="inativo" {{ old('status', $article->status) === 'inativo' ? 'selected' : '' }}>
-                        ❌ Inativo
+                         Inativo
                     </option>
                 </select>
                 @error('status')
@@ -53,10 +53,10 @@
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <a href="{{ route('articles.index') }}" class="btn btn-secondary me-md-2">
-                    ❌ Cancelar
+                    <i class="bi bi-x-lg"></i> Cancelar
                 </a>
                 <button type="submit" class="btn btn-primary">
-                    💾 Atualizar Artigo
+                    <i class="bi bi-floppy2-fill"></i> Atualizar Artigo
                 </button>
             </div>
         </form>

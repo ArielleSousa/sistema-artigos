@@ -4,7 +4,7 @@
 <div class="d-flex justify-content-between align-items-center mb-4">
     <h1>📚 Lista de Artigos</h1>
     <a href="{{ route('articles.create') }}" class="btn btn-success">
-        ➕ Novo Artigo
+        <i class="bi bi-plus"></i> Novo Artigo
     </a>
 </div>
 
@@ -15,7 +15,6 @@
                 <table class="table table-hover">
                     <thead class="table-dark">
                         <tr>
-                            <th>ID</th>
                             <th>Título</th>
                             <th>Status</th>
                             <th>Data</th>
@@ -25,23 +24,23 @@
                     <tbody>
                         @foreach($articles as $article)
                         <tr>
-                            <td>{{ $article->id }}</td>
+                            
                             <td>{{ $article->titulo }}</td>
                             <td>
                                 <span class="badge {{ $article->status === 'ativo' ? 'bg-success' : 'bg-secondary' }}">
-                                    {{ $article->status === 'ativo' ? '✅ Ativo' : '❌ Inativo' }}
+                                    {{ $article->status === 'ativo' ? ' Ativo' : ' Inativo' }}
                                 </span>
                             </td>
-                            <td>{{ $article->created_at->format('d/m/Y H:i') }}</td>
+                            <td>{{ $article->created_at->format('d/m/Y') }}</td>
                             <td>
                                 <a href="{{ route('articles.edit', $article) }}" class="btn btn-sm btn-warning">
-                                    ✏️ Editar
+                                    <i class="bi bi-pencil"></i> Editar
                                 </a>
                                 <form method="POST" action="{{ route('articles.destroy', $article) }}" 
-                                      class="d-inline" onsubmit="return confirm('❌ Tem certeza que deseja excluir?')">
+                                      class="d-inline" onsubmit="return confirm('Tem certeza que deseja excluir?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger">🗑️ Excluir</button>
+                                    <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i> Excluir</button>
                                 </form>
                             </td>
                         </tr>
