@@ -1,0 +1,64 @@
+@extends('layouts.app')
+
+@section('content')
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>➕ Novo Artigo</h1>
+    <a href="{{ route('articles.index') }}" class="btn btn-secondary">
+        ⬅️ Voltar
+    </a>
+</div>
+
+<div class="card shadow">
+    <div class="card-body">
+        <form method="POST" action="{{ route('articles.store') }}">
+            @csrf
+            
+            <div class="mb-3">
+                <label for="titulo" class="form-label">📝 Título *</label>
+                <input type="text" class="form-control @error('titulo') is-invalid @enderror" 
+                       id="titulo" name="titulo" value="{{ old('titulo') }}" 
+                       placeholder="Digite o título do artigo..." required>
+                @error('titulo')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="conteudo" class="form-label">📄 Conteúdo</label>
+                <textarea class="form-control @error('conteudo') is-invalid @enderror" 
+                          id="conteudo" name="conteudo" rows="8" 
+                          placeholder="Digite o conteúdo do artigo...">{{ old('conteudo') }}</textarea>
+                @error('conteudo')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="mb-3">
+                <label for="status" class="form-label">🔄 Status *</label>
+                <select class="form-select @error('status') is-invalid @enderror" 
+                        id="status" name="status" required>
+                    <option value="">Selecione o status...</option>
+                    <option value="ativo" {{ old('status') === 'ativo' ? 'selected' : '' }}>
+                        ✅ Ativo
+                    </option>
+                    <option value="inativo" {{ old('status') === 'inativo' ? 'selected' : '' }}>
+                        ❌ Inativo
+                    </option>
+                </select>
+                @error('status')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="{{ route('articles.index') }}" class="btn btn-secondary me-md-2">
+                    ❌ Cancelar
+                </a>
+                <button type="submit" class="btn btn-success">
+                    💾 Salvar Artigo
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+@endsection
